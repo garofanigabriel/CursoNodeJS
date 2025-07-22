@@ -1,0 +1,1 @@
+esta carpeta contiene los controladores para manejar las solicitudes HTTP, lo que nos permite separar al logica de negocio de las rutas

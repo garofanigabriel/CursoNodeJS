@@ -1,0 +1,1 @@
+Esta carpeta contiene las rutas de la app, se crea un archivo por ruta por ejemplo "app.get/ping"

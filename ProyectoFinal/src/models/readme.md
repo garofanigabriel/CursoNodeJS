@@ -1,0 +1,1 @@
+esta carpeta contiene los modelos q son la representacion de los datos de la applicacion
