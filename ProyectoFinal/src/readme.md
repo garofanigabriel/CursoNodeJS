@@ -1,1 +1,0 @@
-esta carpeta se crea para ordenar el codigo del proyecto en sub carpetas, que tendra el codigo fuente de la app creada con Node
