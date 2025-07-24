@@ -19,13 +19,3 @@ router.post('/create', createAuto);             // api/autos/create
 router.delete('/:id', deleteAuto);              // api/autos/:id
 
 export default router;
-
-// EJEMPLO DE AUTO VALIDO
-// {
-//     "id": "0QA5gfvfj6BY26bUt7Sw",
-//     "precio": 45000000,
-//     "year": 2025,
-//     "marca": "Toyota",
-//     "modelo": "Corolla",
-//     "color": "Negro"
-// }
