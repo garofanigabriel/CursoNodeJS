@@ -6,6 +6,12 @@ import autosRoutes from './src/routes/autos.routes.js';
 import authRoutes from './src/routes/auth.routes.js';
 import { verifyToken } from './src/middlewares/auth.middleware.js';
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 dotenv.config(); // ??
 const app = express();
 
@@ -15,9 +21,7 @@ app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/api/autos', verifyToken, autosRoutes);
 
-app.get('/', (req, res) => {
-  res.send('API de Autos funcionando');
-});
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res) => {
   res.status(404).json({ error: 'Ruta no encontrada maquinola, try again' });

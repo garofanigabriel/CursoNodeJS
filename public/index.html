@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API de Autos</title>
+</head>
+
+<body>
+    <h1>🚗 API de Autos</h1>
+    <p>Esta API permite gestionar autos usando Firebase Firestore y está protegida por autenticación JWT.</p>
+
+    <section>
+        <h2>🔐 Login</h2>
+        <p>Usá este endpoint para autenticarte y obtener un token JWT:</p>
+        <p><strong>POST</strong> <code>/auth/login</code></p>
+        <pre><code>{
+  "username": "admin",
+  "password": "1234"
+}</code></pre>
+        <p>Respuesta:</p>
+        <pre><code>{
+  "token": "tu_token_jwt"
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>📦 Endpoints de Autos</h2>
+        <ul>
+            <li><strong>GET</strong> <code>/api/autos</code> - Obtener todos los autos</li>
+            <li><strong>GET</strong> <code>/api/autos/:id</code> - Obtener auto por ID</li>
+            <li><strong>POST</strong> <code>/api/autos/create</code> - Crear un auto</li>
+            <li><strong>DELETE</strong> <code>/api/autos/:id</code> - Eliminar un auto</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>✅ Formato válido de auto</h2>
+        <p>Este es el JSON esperado al crear un auto:</p>
+        <pre><code>{
+  "marca": "Ford",     
+  "modelo": "Focus",
+  "precio": 12000000,
+  "color": "Azul",
+  "anio": 2023
+}</code></pre>
+    </section>
+
+    <footer>
+        <p><strong>Autor:</strong> Gabriel Garofani</p>
+    </footer>
+</body>
+
+</html>
