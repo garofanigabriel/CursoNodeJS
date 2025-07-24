@@ -1,19 +1,21 @@
-const productos = [
-  { id: 1, nombre: 'Cafe', precio: 2500, categoria: 'bebida' },
-  { id: 2, nombre: 'Te', precio: 500, categoria: 'bebida' },
-  { id: 3, nombre: 'Chocolate', precio: 5000, categoria: 'comida' },
-  { id: 4, nombre: 'Alfajor', precio: 1500, categoria: 'comida' },
-  { id: 5, nombre: 'Cereal', precio: 2000, categoria: 'desayuno' }
-];
+import * as ProductModel from '../models/product.model.js';
 
 export function getAllProducts() {
-  return productos;
+  return ProductModel.findAll();
 }
 
 export function getProductById(id) {
-  return productos.find(p => p.id === id);
+  return ProductModel.findById(id);
 }
 
 export function getProductsByCategory(categoria) {
-  return productos.filter(p => p.categoria === categoria);
+  return ProductModel.findByCategory(categoria);
+}
+
+export function addProduct(name, price, category) {
+  return ProductModel.addProduct(name, price, category)
+}
+
+export function deleteProduct(id) {
+  return ProductModel.deleteById(id)
 }

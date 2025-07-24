@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "nombre": "Cafe",
+    "precio": 2500,
+    "categoria": "bebida"
+  },
+  {
+    "id": 2,
+    "nombre": "Te",
+    "precio": 500,
+    "categoria": "bebida"
+  },
+  {
+    "id": 3,
+    "nombre": "Chocolate",
+    "precio": 5000,
+    "categoria": "comida"
+  },
+  {
+    "id": 4,
+    "nombre": "Alfajor",
+    "precio": 1500,
+    "categoria": "comida"
+  },
+  {
+    "id": 5,
+    "nombre": "Cereal",
+    "precio": 2000,
+    "categoria": "desayuno"
+  },
+  {
+    "id": 6,
+    "name": "Yerba Mate",
+    "price": 3500,
+    "category": "bebida"
+  },
+  {
+    "id": 7,
+    "name": "aceite",
+    "price": 3500,
+    "category": "algo"
+  }
+]

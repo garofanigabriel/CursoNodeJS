@@ -1,7 +1,10 @@
 import {
   getAllProducts,
   getProductById,
-  getProductsByCategory
+  getProductsByCategory,
+  addProduct,
+  deleteProduct
+
 } from '../services/product.service.js';
 
 export const getProducts = (req, res) => {
@@ -28,4 +31,25 @@ export const getProduct = (req, res) => {
   } else {
     res.status(404).json({ error: 'Producto no encontrado maquinola' });
   }
+};
+
+export const postProducto = (req, res) => {
+  const { nombre, precio, categoria } = req.body;
+  if (!nombre || !precio || !categoria) {
+    return res.status(400).json({ error: 'Faltan campos obligatorios' });
+  }
+
+  const productoCreado = addProduct( nombre, precio, categoria);
+  res.status(201).json(productoCreado);
+};
+
+export const deleteProducto = (req, res) => {
+  const id = Number(req.params.id);
+  const productoEliminado = deleteProduct(id);
+
+  if (!productoEliminado) {
+    return res.status(404).json({ error: 'Producto no encontrado para eliminar' });
+  }
+
+  res.json({ mensaje: 'Producto eliminado', producto: productoEliminado });
 };
