@@ -1,21 +1,21 @@
-import * as ProductModel from '../models/product.model.js';
+import * as ProductFirestore from '../models/product.model.js';
 
 export function getAllProducts() {
-  return ProductModel.findAll();
+  return ProductFirestore.getAllProducts();
 }
 
 export function getProductById(id) {
-  return ProductModel.findById(id);
+  return ProductFirestore.getProductById(id);
 }
 
-export function getProductsByCategory(categoria) {
-  return ProductModel.findByCategory(categoria);
-}
+// export function getProductsByCategory(categoria) {
+//   return ProductFirestore.findByCategory(categoria);
+// }
 
-export function addProduct(name, price, category) {
-  return ProductModel.addProduct(name, price, category)
+export function saveProduct(product) {
+  return ProductFirestore.saveProduct(product)
 }
 
 export function deleteProduct(id) {
-  return ProductModel.deleteById(id)
+  return ProductFirestore.deleteProduct(id)
 }

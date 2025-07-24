@@ -1,49 +1,45 @@
-import fs from 'fs';
-import path from 'path';
+import { db } from '../data/data.js';
+import {
+    collection,
+    getDocs,
+    getDoc,
+    addDoc,
+    deleteDoc,
+    doc
+} from 'firebase/firestore';
 
-const filePath = path.resolve('./src/data/listaProductos.json');
+const productsCollection = collection(db, 'productos');
 
-// Leer los productos desde el JSON
-function readProducts() {
-    const data = fs.readFileSync(filePath, 'utf-8');
-    return JSON.parse(data);
+// Método para buscar un producto por su ID
+export async function getProductById(id) {
+    const productDoc = await getDoc(doc(productsCollection, id));
+    if (productDoc.exists()) {
+        return {
+            id: productDoc.id,
+            ...productDoc.data()
+        };
+    } else {
+        return null;
+    }
 }
 
-// Escribir en el archivo
-function writeProducts(productos) {
-    fs.writeFileSync(filePath, JSON.stringify(productos, null, 2));
-}
+// Método para obtener todos los productos
+export async function getAllProducts() {
+    const querySnapshot = await getDocs(productsCollection);
+    const products = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+    }));
 
-// todos los productos
-export function findAll() {
-    return readProducts();
-}
+    return products;
+};
 
-// productos por id
-export function findById(id) {
-    return readProducts().find(p => p.id === id);
-}
+// Método para guardar un producto en Firestore
+export async function saveProduct(product) {
+    await addDoc(productsCollection, product);
+};
 
-// productos por categoria
-export function findByCategory(categoria) {
-    return readProducts().filter(p => p.categoria === categoria);
-}
-
-// agrega productos al archivo json
-export function addProduct(name, price, category) {
-    const productos = readProducts();
-    const productoNuevo = { id: productos.length + 1, name, price, category }
-    productos.push(productoNuevo);
-    writeProducts(productos);
-    return productoNuevo;
-}
-
-// elimina producto del archivo json
-export function deleteById(id) {
-    const productos = readProducts();
-    productos = productos.filter(p => p.id !== id);
-    writeProducts(productos);
-    return productos;
-}
-
-
+// Método para eliminar un producto por su ID
+export async function deleteProduct(id) {
+    await deleteDoc(doc(productsCollection, id));
+};

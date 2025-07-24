@@ -1,31 +1,30 @@
 import {
   getAllProducts,
   getProductById,
-  getProductsByCategory,
-  addProduct,
+  // getProductsByCategory,
+  saveProduct,
   deleteProduct
 
 } from '../services/product.service.js';
 
-export const getProducts = (req, res) => {
-  const categoria = req.query.categoria;
-  
-  if (categoria) {
-    const filtrados = getProductsByCategory(categoria);
-    if (filtrados.length === 0) {
-      return res.status(404).json({ error: 'Esta categoría no existe maquinola' });
-    }
-    return res.json(filtrados);
-  }
+export const getProducts = async (req, res) => {
+  // const categoria = req.query.categoria;
 
-  const productos = getAllProducts();
+  // if (categoria) {
+  //   const filtrados = getProductsByCategory(categoria);
+  //   if (filtrados.length === 0) {
+  //     return res.status(404).json({ error: 'Esta categoría no existe maquinola' });
+  //   }
+  //   return res.json(filtrados);
+  // }
+
+  const productos = await getAllProducts();
   res.json(productos);
 };
 
-export const getProduct = (req, res) => {
-  const id = Number(req.params.id);
-  const producto = getProductById(id);
-
+export const getProduct = async (req, res) => {
+  const id = req.params.id;
+  const producto = await getProductById(id);
   if (producto) {
     res.json(producto);
   } else {
@@ -33,23 +32,26 @@ export const getProduct = (req, res) => {
   }
 };
 
-export const postProducto = (req, res) => {
+export const postProducto = async (req, res) => {
   const { nombre, precio, categoria } = req.body;
   if (!nombre || !precio || !categoria) {
     return res.status(400).json({ error: 'Faltan campos obligatorios' });
   }
-
-  const productoCreado = addProduct( nombre, precio, categoria);
-  res.status(201).json(productoCreado);
-};
-
-export const deleteProducto = (req, res) => {
-  const id = Number(req.params.id);
-  const productoEliminado = deleteProduct(id);
-
-  if (!productoEliminado) {
-    return res.status(404).json({ error: 'Producto no encontrado para eliminar' });
+  try {
+    await saveProduct({ nombre, precio, categoria });
+    res.status(201).json('success');
+  } catch {
+    return res.status(400).json({ error: 'No se pudo guardar el objeto' })
   }
 
-  res.json({ mensaje: 'Producto eliminado', producto: productoEliminado });
+};
+
+export const deleteProducto = async (req, res) => {
+  const id = req.params.id;
+  try {
+    await deleteProduct(id);
+    res.json({ mensaje: 'Producto eliminado'});
+  } catch {
+    return res.status(404).json({ error: 'Producto no encontrado para eliminar' });
+  }
 };
